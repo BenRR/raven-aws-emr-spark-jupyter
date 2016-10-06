@@ -28,9 +28,11 @@ echo "c.NotebookApp.port = 8192" >>  /home/hadoop/.ipython/profile_default/ipyth
 
 #starting ipython notebook with pyspark interactive support.
 export IPYTHON_HOME=/home/hadoop/IPythonNB/venv/
-export PATH=$PATH:$IPYTHON_HOME/bin
-export IPYTHON_OPTS="notebook --no-browser"
+# export PATH=$PATH:$IPYTHON_HOME/bin
+# export IPYTHON_OPTS="notebook --no-browser"
 export MASTER=yarn-client
+export PYSPARK_DRIVER_PYTHON=ipython
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook --NotebookApp.open_browser=False --NotebookApp.ip='*' --NotebookApp.port=8880"
 nohup /home/hadoop/spark/bin/pyspark --master yarn-client > /mnt/var/log/python_notebook.log &
  
 fi
